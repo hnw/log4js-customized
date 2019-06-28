@@ -6,7 +6,7 @@ let defaults = {};
 let enabled = false;
 
 // add new method setDefaults()
-function setDefaults(options) {
+const setDefaults = (options) => {
   /* some custom behavior */
   let appenders = {
     console: { type: 'console', layout: { type: 'messagePassThrough' } }
@@ -15,7 +15,11 @@ function setDefaults(options) {
   let default_log_level = 'warn';
 
   if (options['log']) {
-    appenders['file'] = { type: 'dateFile', filename: options['log'], layout: { type: 'pattern', pattern: '[%d] [%p] %m' } };
+    appenders['file'] = {
+      type: 'dateFile',
+      filename: options['log'],
+      layout: { type: 'pattern', pattern: '[%d] [%p] %m' }
+    };
     default_appenders = ['file'];
   }
   if (options['verbose'] >= 2) { // -vv以上でdebug出力
@@ -27,7 +31,12 @@ function setDefaults(options) {
   }
   defaults = {
     appenders: appenders,
-    categories: { default: {appenders: default_appenders, level: default_log_level} }
+    categories: {
+      default: {
+        appenders: default_appenders,
+        level: default_log_level
+      }
+    }
   };
   return myLog4js;
 }
@@ -35,7 +44,7 @@ myLog4js.setDefaults = setDefaults
 
 // replace log4js.configure()
 const origConfigure = myLog4js.configure;
-function configure(configurationFileOrObject) {
+const configure = (configurationFileOrObject) => {
   enabled = true;
   return origConfigure.apply(myLog4js, [configurationFileOrObject]);
 }
@@ -43,7 +52,7 @@ myLog4js.configure = configure;
 
 // replace log4js.shutdown()
 const origShutdown = myLog4js.shutdown;
-function shutdown(cb) {
+const shutdown = (cb) => {
   enabled = false;
   return origShutdown.apply(myLog4js, [cb]);
 }
@@ -51,7 +60,7 @@ myLog4js.shutdown = shutdown;
 
 // replace log4js.getLogger()
 const origGetLogger = myLog4js.getLogger;
-function getLogger(category) {
+const getLogger = (category) => {
   if (!enabled && !process.env.LOG4JS_CONFIG && defaults['appenders']) {
     configure(defaults);
   }

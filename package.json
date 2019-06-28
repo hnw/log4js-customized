@@ -1,6 +1,6 @@
 {
   "name": "log4js-customized",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A customized version of log4js",
   "main": "log4js-customized.js",
   "private": true,
