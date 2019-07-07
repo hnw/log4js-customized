@@ -1,12 +1,12 @@
 'use strict'
-const myLog4js = require('log4js');
+const log4js = require('log4js');
+const myLog4js = Object.assign({}, log4js);
 
 // private variables
 let defaults = {};
 let enabled = false;
 
-// add new method setDefaults()
-const setDefaults = (options) => {
+myLog4js.setDefaults = function(options) {
   /* some custom behavior */
   let appenders = {
     console: { type: 'console', layout: { type: 'messagePassThrough' } }
@@ -40,32 +40,29 @@ const setDefaults = (options) => {
   };
   return myLog4js;
 }
-myLog4js.setDefaults = setDefaults
 
 // replace log4js.configure()
 const origConfigure = myLog4js.configure;
-const configure = (configurationFileOrObject) => {
+const configure = function(...args) {
   enabled = true;
-  return origConfigure.apply(myLog4js, [configurationFileOrObject]);
+  return origConfigure.apply(myLog4js, args);
 }
 myLog4js.configure = configure;
 
 // replace log4js.shutdown()
 const origShutdown = myLog4js.shutdown;
-const shutdown = (cb) => {
+myLog4js.shutdown = function(...args) {
   enabled = false;
-  return origShutdown.apply(myLog4js, [cb]);
+  return origShutdown.apply(myLog4js, args);
 }
-myLog4js.shutdown = shutdown;
 
 // replace log4js.getLogger()
 const origGetLogger = myLog4js.getLogger;
-const getLogger = (category) => {
+myLog4js.getLogger = function(...args) {
   if (!enabled && !process.env.LOG4JS_CONFIG && defaults['appenders']) {
     configure(defaults);
   }
-  return origGetLogger.apply(myLog4js, [category]);
+  return origGetLogger.apply(myLog4js, args);
 }
-myLog4js.getLogger = getLogger;
 
 module.exports = myLog4js;
