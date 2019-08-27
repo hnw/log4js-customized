@@ -1,12 +1,12 @@
 {
   "name": "@hnw/log4js-customized",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A customized version of log4js",
   "main": "log4js-customized.js",
   "private": false,
   "repository": {
     "type": "git",
-    "url" : "https://github.com/hnw/log4js-customized.git"
+    "url": "https://github.com/hnw/log4js-customized.git"
   },
   "author": "hnw",
   "license": "MIT",
