@@ -7,7 +7,7 @@ A customized version of log4js
 To use log4js-customized in your project, run:
 
 ```
-npm i hnw/log4js-customized
+npm i @hnw/log4js-customized
 ```
 
 or write a `package.json` file as follows, then run `npm i`.
@@ -16,7 +16,7 @@ or write a `package.json` file as follows, then run `npm i`.
 {
   "name": "test_app",
   "dependencies": {
-    "my-log4js": "hnw/log4js-customized"
+    "@hnw/log4js-customized": "*"
   }
 }
 ```
