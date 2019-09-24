@@ -12,5 +12,11 @@
   "license": "MIT",
   "dependencies": {
     "log4js": "*"
+  },
+  "devDependencies": {
+    "ava": "*"
+  },
+  "scripts": {
+    "test": "ava --verbose"
   }
 }
