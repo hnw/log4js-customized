@@ -9,9 +9,21 @@ let enabled = false;
 myLog4js.setDefaults = function(options) {
   /* some custom behavior */
   let appenders = {
-    console: { type: 'console', layout: { type: 'messagePassThrough' } }
+    stdout: {
+      type: 'logLevelFilter',
+      level: 'TRACE',
+      maxLevel: 'INFO',
+      appender: { type: 'console' },
+      layout: { type: 'messagePassThrough' }
+    },
+    stderr: {
+      type: 'logLevelFilter',
+      level: 'WARN',
+      appender: { type: 'stderr' }
+      layout: { type: 'messagePassThrough' }
+    },
   };
-  let default_appenders = ['console'];
+  let default_appenders = ['stdout', 'stderr'];
   let default_log_level = 'warn';
 
   if (options['log']) {
