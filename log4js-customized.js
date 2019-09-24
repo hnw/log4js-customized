@@ -14,13 +14,13 @@ myLog4js.setDefaults = function(options) {
       level: 'TRACE',
       maxLevel: 'INFO',
       appender: { type: 'console' },
-      layout: { type: 'messagePassThrough' }
+      layout: { type: 'messagePassThrough' },
     },
     stderr: {
       type: 'logLevelFilter',
       level: 'WARN',
-      appender: { type: 'stderr' }
-      layout: { type: 'messagePassThrough' }
+      appender: { type: 'stderr' },
+      layout: { type: 'messagePassThrough' },
     },
   };
   let default_appenders = ['stdout', 'stderr'];
