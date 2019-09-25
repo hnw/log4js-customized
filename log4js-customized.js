@@ -6,7 +6,7 @@ const myLog4js = Object.assign({}, log4js);
 let defaults = {};
 let enabled = false;
 
-myLog4js.setDefaults = function(options) {
+myLog4js.setDefaults = function(options = {}) {
   /* some custom behavior */
   let appenders = {
     stdout: { type: 'console', layout: { type: 'messagePassThrough' } },
